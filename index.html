@@ -176,98 +176,117 @@
     .sec-title { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
     .sec-meta { font-family: "JetBrains Mono", monospace; font-size: 11.5px; color: var(--dim); }
 
-    /* Bento Grid */
-    .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
-    .card {
+    /* Single-Stage Project Showcase */
+    .proj-tabs {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 18px; flex-wrap: wrap;
+    }
+    .proj-tab-list {
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .proj-tab {
+      font-family: "JetBrains Mono", monospace; font-size: 12px;
+      padding: 7px 13px; border-radius: 8px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--muted); cursor: pointer; transition: all 0.18s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .proj-tab:hover { color: var(--text); border-color: var(--border-strong); }
+    .proj-tab.active {
+      color: #09090b; background: #f4f4f5; border-color: #f4f4f5; font-weight: 600;
+    }
+    .proj-tab span.num { opacity: 0.55; font-size: 10.5px; }
+    .proj-nav-btns { display: flex; gap: 6px; }
+    .nav-arrow {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--muted); cursor: pointer; font-size: 14px;
+      display: grid; place-items: center; transition: all 0.15s;
+    }
+    .nav-arrow:hover { color: var(--text); border-color: var(--border-strong); }
+
+    .showcase-card {
       position: relative;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px; padding: 20px;
-      display: flex; flex-direction: column; justify-content: space-between;
+      border-radius: 14px;
+      padding: 28px;
       overflow: hidden;
       transition: border-color 0.2s;
     }
-    .card::after {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.045), transparent 60%);
-      opacity: 0; transition: opacity 0.25s;
+    .showcase-card:hover { border-color: var(--border-strong); }
+    .proj-slide {
+      display: none;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 32px;
+      align-items: center;
+      animation: fadeSlide 0.28s ease;
     }
-    .card:hover::after { opacity: 1; }
-    .card:hover { border-color: var(--border-strong); }
-    .span-3 { grid-column: span 3; }
-    .span-2 { grid-column: span 2; }
-
-    .card-meta {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 12px; font-family: "JetBrains Mono", monospace; font-size: 11px;
+    .proj-slide.active { display: grid; }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .card-cat { color: var(--muted); }
-    .card-ctrl {
-      display: inline-flex; gap: 5px; align-items: center;
-    }
-    .mini-btn {
-      font-family: "JetBrains Mono", monospace; font-size: 10px;
-      padding: 2px 7px; border-radius: 4px;
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      color: var(--muted); cursor: pointer; transition: all 0.15s;
-    }
-    .mini-btn:hover, .mini-btn.active {
-      color: var(--text); border-color: var(--border-strong); background: rgba(255,255,255,0.09);
-    }
-
-    /* Interactive Demo Viewport */
+    .proj-info { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+    .proj-info h3 { font-size: 26px; font-weight: 700; letter-spacing: -0.025em; margin: 4px 0 6px; }
+    .proj-info p { font-size: 14.5px; color: var(--muted); line-height: 1.72; }
     .stage {
-      height: 154px; border-radius: 8px;
+      height: 248px; border-radius: 10px;
       background: #08080b;
-      border: 1px solid rgba(255,255,255,0.06);
-      margin-bottom: 16px; padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 18px 20px;
       position: relative; overflow: hidden;
       font-family: "JetBrains Mono", monospace;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .stage-head {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--dim);
     }
 
     /* 1. Pipeline SVG */
-    .pipe-svg { width: 100%; height: 76px; display: block; }
+    .pipe-svg { width: 100%; height: 110px; display: block; }
     .dash-flow {
       stroke-dasharray: 5 5;
       animation: dashMove 1.2s linear infinite;
     }
     @keyframes dashMove { to { stroke-dashoffset: -20; } }
     .pipe-telemetry {
-      margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06);
       display: flex; justify-content: space-between; align-items: center;
-      font-size: 10.5px; color: var(--muted);
+      font-size: 11.5px; color: var(--muted);
     }
     .pipe-telemetry .ok { color: var(--green); }
 
     /* 2. Monochrome Streaming Chat */
-    .chat-wrap { display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
-    .chat-msg { font-family: "Inter", "PingFang SC", sans-serif; font-size: 12px; line-height: 1.5; }
+    .chat-wrap { display: flex; flex-direction: column; justify-content: center; gap: 14px; height: 100%; }
+    .chat-msg { font-family: "Inter", "PingFang SC", sans-serif; font-size: 13px; line-height: 1.6; }
     .msg-u {
       align-self: flex-end; color: #e4e4e7;
       background: rgba(255,255,255,0.06); border: 1px solid var(--border);
-      padding: 5px 10px; border-radius: 7px; max-width: 82%;
+      padding: 8px 13px; border-radius: 8px; max-width: 82%;
     }
     .msg-a {
-      color: #a1a1aa; border-left: 2px solid var(--accent); padding-left: 10px;
-      margin-top: 8px; font-size: 11.8px;
+      color: #a1a1aa; border-left: 2px solid var(--accent); padding-left: 12px;
+      font-size: 13px;
     }
-    .msg-a b { color: var(--text); font-weight: 600; font-family: "JetBrains Mono", monospace; font-size: 10.5px; }
+    .msg-a b { color: var(--text); font-weight: 600; font-family: "JetBrains Mono", monospace; font-size: 11px; }
     .cursor {
-      display: inline-block; width: 5px; height: 11px; background: var(--text);
+      display: inline-block; width: 5px; height: 12px; background: var(--text);
       margin-left: 3px; vertical-align: middle; animation: blink 0.9s infinite;
     }
     @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
 
     /* 3. Canvas Sonar */
-    .sonar-wrap { display: flex; align-items: center; gap: 14px; height: 100%; }
-    #sonarCanvas { width: 120px; height: 120px; flex-shrink: 0; border-radius: 50%; }
-    .telemetry-col { font-size: 10.5px; color: var(--muted); line-height: 1.75; }
+    .sonar-wrap { display: flex; align-items: center; justify-content: center; gap: 28px; height: 100%; }
+    #sonarCanvas { width: 170px; height: 170px; flex-shrink: 0; border-radius: 50%; }
+    .telemetry-col { font-size: 12px; color: var(--muted); line-height: 2; }
     .telemetry-col strong { color: var(--text); font-weight: 500; }
 
     /* 4. Precision CV HUD */
-    .cv-wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 12px; height: 100%; align-items: center; }
+    .cv-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; height: 100%; align-items: center; }
     .cv-frame {
-      position: relative; height: 124px; border-radius: 6px;
+      position: relative; height: 178px; border-radius: 8px;
       background: radial-gradient(circle at 50% 50%, rgba(56,189,248,0.08), rgba(0,0,0,0.4));
       border: 1px solid rgba(255,255,255,0.07);
       display: grid; place-items: center; overflow: hidden;
@@ -279,29 +298,44 @@
       animation: scanMove 2.6s ease-in-out infinite;
     }
     @keyframes scanMove { 0%, 100% { top: 10%; } 50% { top: 90%; } }
-    .cv-bars { display: flex; flex-direction: column; gap: 8px; font-size: 10px; color: var(--muted); }
-    .bar-row span { display: flex; justify-content: space-between; margin-bottom: 3px; }
-    .bar-track { height: 4px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
+    .cv-bars { display: flex; flex-direction: column; gap: 14px; font-size: 11.5px; color: var(--muted); }
+    .bar-row span { display: flex; justify-content: space-between; margin-bottom: 5px; }
+    .bar-track { height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
 
     /* 5. Interactive 9D Radar */
-    .radar-9d-wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 100%; }
+    .radar-9d-wrap { display: flex; align-items: center; justify-content: center; gap: 32px; height: 100%; }
     #radarPoly { transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
 
-    .card h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 6px; }
-    .card p { font-size: 13px; color: var(--muted); margin-bottom: 14px; line-height: 1.6; }
-    .card-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .card-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: "JetBrains Mono", monospace; font-size: 11px;
+    }
+    .card-cat { color: var(--muted); }
+    .card-ctrl { display: inline-flex; gap: 6px; align-items: center; }
+    .mini-btn {
+      font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+      padding: 3px 9px; border-radius: 5px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--muted); cursor: pointer; transition: all 0.15s;
+    }
+    .mini-btn:hover, .mini-btn.active {
+      color: var(--text); border-color: var(--border-strong); background: rgba(255,255,255,0.1);
+    }
+    .card-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 8px; }
+    .tags { display: flex; gap: 7px; flex-wrap: wrap; }
     .tags span {
-      font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--muted);
-      padding: 2px 7px; border-radius: 4px; background: rgba(255,255,255,0.035);
+      font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--muted);
+      padding: 3px 9px; border-radius: 5px; background: rgba(255,255,255,0.035);
       border: 1px solid var(--border);
     }
     .repo-link {
-      font-family: "JetBrains Mono", monospace; font-size: 11.5px; color: var(--text);
-      text-decoration: none; opacity: 0.75; transition: opacity 0.15s;
+      font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: var(--text);
+      text-decoration: none; padding: 6px 12px; border-radius: 7px;
+      border: 1px solid var(--border); background: rgba(255,255,255,0.03);
+      transition: all 0.15s;
     }
-    .repo-link:hover { opacity: 1; text-decoration: underline; }
+    .repo-link:hover { border-color: var(--border-strong); background: rgba(255,255,255,0.08); }
 
     /* Stack */
     .stack-row {
@@ -332,7 +366,7 @@
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; padding-top: 48px; }
       .hero h1 { font-size: 34px; }
-      .span-3, .span-2 { grid-column: span 6; }
+      .proj-slide { grid-template-columns: 1fr; gap: 20px; }
       .stack-row { grid-template-columns: 1fr; }
     }
   </style>
@@ -388,18 +422,41 @@
     <section id="projects">
       <div class="sec-head">
         <h2 class="sec-title" data-i18n="sec_p">Selected Works</h2>
-        <span class="sec-meta">INTERACTIVE PROTOTYPES · 05</span>
+        <span class="sec-meta" id="projCounter">01 / 05 · INTERACTIVE SHOWCASE</span>
       </div>
 
-      <div class="bento">
-        <!-- 1. ebrietas-Email -->
-        <article class="card span-3">
+      <div class="proj-tabs">
+        <div class="proj-tab-list">
+          <button class="proj-tab active" onclick="showProj(0)"><span class="num">01</span>ebrietas-Email</button>
+          <button class="proj-tab" onclick="showProj(1)"><span class="num">02</span>mindcapture-app</button>
+          <button class="proj-tab" onclick="showProj(2)"><span class="num">03</span>OpenAIglasses</button>
+          <button class="proj-tab" onclick="showProj(3)"><span class="num">04</span>nutri-pal</button>
+          <button class="proj-tab" onclick="showProj(4)"><span class="num">05</span>mindcapture-survey</button>
+        </div>
+        <div class="proj-nav-btns">
+          <button class="nav-arrow" onclick="stepProj(-1)" title="Previous">←</button>
+          <button class="nav-arrow" onclick="stepProj(1)" title="Next">→</button>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <!-- 01 ebrietas-Email -->
+        <article class="proj-slide active">
+          <div class="proj-info">
+            <div>
+              <div class="card-meta"><span class="card-cat">01 / FOREIGN TRADE × AI</span></div>
+              <h3>ebrietas-Email</h3>
+              <p data-i18n="p1">LinkedIn 外贸客户智能挖掘系统：整合 Bright Data 采集、Hunter.io 邮箱校验与通义千问，自动完成海外买家筛选与个性化开发信生成。</p>
+            </div>
+            <div class="card-foot">
+              <div class="tags"><span>Python</span><span>Qwen</span><span>Bright Data</span><span>Hunter.io</span></div>
+              <a class="repo-link" href="https://github.com/supumi/ebrietas-Email" target="_blank">View Source ↗</a>
+            </div>
+          </div>
           <div>
-            <div class="card-meta">
-              <span class="card-cat">01 / FOREIGN TRADE × AI</span>
-              <div class="card-ctrl">
-                <button class="mini-btn active" onclick="triggerLead()">Run Sample ↻</button>
-              </div>
+            <div class="stage-head">
+              <span>LIVE PIPELINE DEMO</span>
+              <button class="mini-btn active" onclick="triggerLead()">Run Sample ↻</button>
             </div>
             <div class="stage">
               <svg class="pipe-svg" viewBox="0 0 440 76">
@@ -424,20 +481,25 @@
                 <span id="leadScore">score 0.96</span>
               </div>
             </div>
-            <h3>ebrietas-Email</h3>
-            <p data-i18n="p1">LinkedIn 外贸客户智能挖掘系统：整合 Bright Data 采集、Hunter.io 邮箱校验与通义千问，自动完成海外买家筛选与个性化开发信生成。</p>
-          </div>
-          <div class="card-foot">
-            <div class="tags"><span>Python</span><span>Qwen</span><span>Bright Data</span><span>Hunter.io</span></div>
-            <a class="repo-link" href="https://github.com/supumi/ebrietas-Email" target="_blank">Source ↗</a>
           </div>
         </article>
 
-        <!-- 2. mindcapture-app -->
-        <article class="card span-3">
+        <!-- 02 mindcapture-app -->
+        <article class="proj-slide">
+          <div class="proj-info">
+            <div>
+              <div class="card-meta"><span class="card-cat">02 / DEEPSEEK FULL-STACK</span></div>
+              <h3>mindcapture-app</h3>
+              <p data-i18n="p2">基于 DeepSeek AI 的心理健康陪伴平台，融合流式共情对话、博客社区与多维成长测评，打造轻量、克制的个人心理空间。</p>
+            </div>
+            <div class="card-foot">
+              <div class="tags"><span>DeepSeek</span><span>FastAPI</span><span>Streaming</span></div>
+              <a class="repo-link" href="https://github.com/supumi/mindcapture-app" target="_blank">View Source ↗</a>
+            </div>
+          </div>
           <div>
-            <div class="card-meta">
-              <span class="card-cat">02 / DEEPSEEK FULL-STACK</span>
+            <div class="stage-head">
+              <span>STREAMING CHAT DEMO</span>
               <div class="card-ctrl">
                 <button class="mini-btn active" onclick="setChat(0, this)">焦虑</button>
                 <button class="mini-btn" onclick="setChat(1, this)">拖延</button>
@@ -453,21 +515,26 @@
                 </div>
               </div>
             </div>
-            <h3>mindcapture-app</h3>
-            <p data-i18n="p2">基于 DeepSeek AI 的心理健康陪伴平台，融合流式共情对话、博客社区与多维成长测评，打造轻量、克制的个人心理空间。</p>
-          </div>
-          <div class="card-foot">
-            <div class="tags"><span>DeepSeek</span><span>FastAPI</span><span>Streaming</span></div>
-            <a class="repo-link" href="https://github.com/supumi/mindcapture-app" target="_blank">Source ↗</a>
           </div>
         </article>
 
-        <!-- 3. OpenAIglasses -->
-        <article class="card span-2">
+        <!-- 03 OpenAIglasses -->
+        <article class="proj-slide">
+          <div class="proj-info">
+            <div>
+              <div class="card-meta"><span class="card-cat">03 / EDGE AI · ESP32</span></div>
+              <h3>OpenAIglasses</h3>
+              <p data-i18n="p3">10 人团队 Leader 主导二次开发与项目落地：基于 ESP32 与多模态大模型，打造面向视障人士的智能导航与实时语音交互助手。</p>
+            </div>
+            <div class="card-foot">
+              <div class="tags"><span>ESP32</span><span>Qwen-Omni</span><span style="color:#fbbf24;border-color:rgba(251,191,36,0.28);">Challenge Cup · Lead</span></div>
+              <a class="repo-link" href="https://github.com/supumi/OpenAIglasses_for_Navigation" target="_blank">View Source ↗</a>
+            </div>
+          </div>
           <div>
-            <div class="card-meta">
-              <span class="card-cat">03 / EDGE AI · ESP32</span>
-              <span style="color:var(--green);">60 FPS</span>
+            <div class="stage-head">
+              <span>ULTRASONIC SONAR HUD</span>
+              <span style="color:var(--green);">60 FPS LIVE</span>
             </div>
             <div class="stage">
               <div class="sonar-wrap">
@@ -476,34 +543,37 @@
                   <div>MCU <strong>ESP32-S3</strong></div>
                   <div>DIST <strong id="sonarDist" style="color:var(--amber);">0.84 m</strong></div>
                   <div>AZIM <strong id="sonarAngle">+24°</strong></div>
-                  <div>TTS <strong style="color:var(--green);">LEFT</strong></div>
+                  <div>TTS <strong style="color:var(--green);">TURN LEFT</strong></div>
                 </div>
               </div>
             </div>
-            <h3>OpenAIglasses</h3>
-            <p data-i18n="p3">10 人团队 Leader 主导二次开发与项目落地：基于 ESP32 与多模态大模型，打造面向视障人士的智能导航与实时语音交互助手。</p>
-          </div>
-          <div class="card-foot">
-            <div class="tags"><span>ESP32</span><span>Qwen-Omni</span><span style="color:#fbbf24;border-color:rgba(251,191,36,0.28);">Challenge Cup · Lead</span></div>
-            <a class="repo-link" href="https://github.com/supumi/OpenAIglasses_for_Navigation" target="_blank">Source ↗</a>
           </div>
         </article>
 
-        <!-- 4. nutri-pal -->
-        <article class="card span-2">
+        <!-- 04 nutri-pal -->
+        <article class="proj-slide">
+          <div class="proj-info">
+            <div>
+              <div class="card-meta"><span class="card-cat">04 / COMPUTER VISION</span></div>
+              <h3>nutri-pal</h3>
+              <p data-i18n="p4">基于 YOLOv8 与 OpenCV 的桌面端食物视觉检测与营养成分分析工具，带完整 GUI 界面。</p>
+            </div>
+            <div class="card-foot">
+              <div class="tags"><span>YOLOv8</span><span>OpenCV</span><span style="color:#fbbf24;border-color:rgba(251,191,36,0.28);">Provincial Award · Lead</span></div>
+              <a class="repo-link" href="https://github.com/supumi/nutri-pal" target="_blank">View Source ↗</a>
+            </div>
+          </div>
           <div>
-            <div class="card-meta">
-              <span class="card-cat">04 / COMPUTER VISION</span>
-              <button class="mini-btn active" onclick="cycleFood()">Next Sample</button>
+            <div class="stage-head">
+              <span>YOLOv8 TELEMETRY HUD</span>
+              <button class="mini-btn active" onclick="cycleFood()">Next Sample ↻</button>
             </div>
             <div class="stage">
               <div class="cv-wrap">
                 <div class="cv-frame">
                   <div class="cv-scan"></div>
-                  <svg width="86" height="86" viewBox="0 0 100 100">
-                    <!-- Corner brackets -->
+                  <svg width="112" height="112" viewBox="0 0 100 100">
                     <path d="M12,26 L12,12 L26,12 M74,12 L88,12 L88,26 M88,74 L88,88 L74,88 M26,88 L12,88 L12,74" fill="none" stroke="#10b981" stroke-width="2"/>
-                    <!-- Minimal geometric plate wireframe -->
                     <circle cx="50" cy="52" r="24" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" stroke-dasharray="3 3"/>
                     <circle cx="44" cy="48" r="10" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-width="1.2"/>
                     <circle cx="59" cy="56" r="8" fill="rgba(16,185,129,0.18)" stroke="#10b981" stroke-width="1.2"/>
@@ -512,38 +582,43 @@
                 </div>
                 <div class="cv-bars">
                   <div class="bar-row"><span><span>KCAL</span><b id="cvKcal" style="color:#f4f4f5;">320</b></span><div class="bar-track"><div class="bar-fill" id="bKcal" style="width:52%;background:#f4f4f5;"></div></div></div>
-                  <div class="bar-row"><span><span>PRO</span><b id="cvPro" style="color:#38bdf8;">24g</b></span><div class="bar-track"><div class="bar-fill" id="bPro" style="width:74%;background:#38bdf8;"></div></div></div>
-                  <div class="bar-row"><span><span>CARB</span><b id="cvCarb" style="color:#10b981;">28g</b></span><div class="bar-track"><div class="bar-fill" id="bCarb" style="width:45%;background:#10b981;"></div></div></div>
+                  <div class="bar-row"><span><span>PROTEIN</span><b id="cvPro" style="color:#38bdf8;">24g</b></span><div class="bar-track"><div class="bar-fill" id="bPro" style="width:74%;background:#38bdf8;"></div></div></div>
+                  <div class="bar-row"><span><span>CARBS</span><b id="cvCarb" style="color:#10b981;">28g</b></span><div class="bar-track"><div class="bar-fill" id="bCarb" style="width:45%;background:#10b981;"></div></div></div>
                 </div>
               </div>
             </div>
-            <h3>nutri-pal</h3>
-            <p data-i18n="p4">基于 YOLOv8 与 OpenCV 的桌面端食物视觉检测与营养成分分析工具，带完整 GUI 界面。</p>
-          </div>
-            <div class="card-foot">
-            <div class="tags"><span>YOLOv8</span><span>OpenCV</span><span style="color:#fbbf24;border-color:rgba(251,191,36,0.28);">Provincial Award · Lead</span></div>
-            <a class="repo-link" href="https://github.com/supumi/nutri-pal" target="_blank">Source ↗</a>
           </div>
         </article>
 
-        <!-- 5. mindcapture-survey -->
-        <article class="card span-2">
+        <!-- 05 mindcapture-survey -->
+        <article class="proj-slide">
+          <div class="proj-info">
+            <div>
+              <div class="card-meta"><span class="card-cat">05 / 9D ANALYTICS</span></div>
+              <h3>mindcapture-survey</h3>
+              <p data-i18n="p5">九维个人成长分析量表问卷系统，自动生成多维能力雷达画像并与 MindCapture 联动。</p>
+            </div>
+            <div class="card-foot">
+              <div class="tags"><span>Analytics</span><span>SVG</span><span>Web</span></div>
+              <a class="repo-link" href="https://github.com/supumi/mindcapture-survey" target="_blank">View Source ↗</a>
+            </div>
+          </div>
           <div>
-            <div class="card-meta">
-              <span class="card-cat">05 / 9D ANALYTICS</span>
+            <div class="stage-head">
+              <span>9D RADAR MORPH DEMO</span>
               <div class="card-ctrl">
-                <button class="mini-btn active" onclick="setRadar(0, this)">A</button>
-                <button class="mini-btn" onclick="setRadar(1, this)">B</button>
-                <button class="mini-btn" onclick="setRadar(2, this)">C</button>
+                <button class="mini-btn active" onclick="setRadar(0, this)">Builder</button>
+                <button class="mini-btn" onclick="setRadar(1, this)">Explorer</button>
+                <button class="mini-btn" onclick="setRadar(2, this)">Balanced</button>
               </div>
             </div>
             <div class="stage">
               <div class="radar-9d-wrap">
-                <svg width="122" height="122" viewBox="0 0 120 120">
-                  <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(255,255,255,0.07)"/>
+                <svg width="168" height="168" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(255,255,255,0.08)"/>
                   <circle cx="60" cy="60" r="30" fill="none" stroke="rgba(255,255,255,0.06)"/>
                   <circle cx="60" cy="60" r="15" fill="none" stroke="rgba(255,255,255,0.05)"/>
-                  <polygon id="radarPoly" points="60,18 92,32 100,66 80,96 42,98 20,72 24,36" fill="rgba(56,189,248,0.16)" stroke="#38bdf8" stroke-width="1.5"/>
+                  <polygon id="radarPoly" points="60,16 94,30 102,64 82,96 42,98 20,72 24,34" fill="rgba(56,189,248,0.16)" stroke="#38bdf8" stroke-width="1.5"/>
                 </svg>
                 <div class="telemetry-col">
                   <div>PROFILE <strong id="radName">Builder</strong></div>
@@ -553,12 +628,6 @@
                 </div>
               </div>
             </div>
-            <h3>mindcapture-survey</h3>
-            <p data-i18n="p5">九维个人成长分析量表问卷系统，自动生成多维能力雷达画像并与 MindCapture 联动。</p>
-          </div>
-          <div class="card-foot">
-            <div class="tags"><span>Analytics</span><span>SVG</span><span>Web</span></div>
-            <a class="repo-link" href="https://github.com/supumi/mindcapture-survey" target="_blank">Source ↗</a>
           </div>
         </article>
       </div>
@@ -609,6 +678,17 @@
         c.style.setProperty('--my', (e.clientY - r.top) + 'px');
       });
     });
+
+    // Project Showcase Switcher
+    let curProj = 0;
+    const totalProj = 5;
+    function showProj(idx) {
+      curProj = (idx + totalProj) % totalProj;
+      document.querySelectorAll('.proj-slide').forEach((s, i) => s.classList.toggle('active', i === curProj));
+      document.querySelectorAll('.proj-tab').forEach((t, i) => t.classList.toggle('active', i === curProj));
+      document.getElementById('projCounter').textContent = `0${curProj + 1} / 05 · INTERACTIVE SHOWCASE`;
+    }
+    function stepProj(d) { showProj(curProj + d); }
 
     // Terminal
     const cmds = {
